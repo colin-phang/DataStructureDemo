@@ -1,5 +1,7 @@
 package com.colin;
 
+import com.colin.model.Person;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,32 +25,4 @@ public class MyHash {
         System.out.println(set);
     }
 
-    public static class Person {
-        String name;
-        int age;
-
-        public Person(String name, int age) {
-            this.name = name;
-            this.age = age;
-        }
-
-        @Override
-        public int hashCode() {
-            return name.hashCode() + age;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj instanceof Person) {
-                Person person = (Person) obj;
-                return name.equals(person.name) && age == person.age;
-            }
-            return false;
-        }
-
-        @Override
-        public String toString() {
-            return name + " " + age;
-        }
-    }
 }

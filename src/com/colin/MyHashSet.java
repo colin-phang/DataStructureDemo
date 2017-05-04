@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Created by Colin on 2017/5/3.
  */
-public class MySet {
+public class MyHashSet {
     //无序、不重复
 //    HashSet、TreeSet
     public static void main(String[] args) {
