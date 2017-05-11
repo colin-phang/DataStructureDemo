@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * e25
+ * e25 ~ e27
  * 图，网状的数据结构，数据结构中最复杂的元素
  * <p>
  * 比较稠密的图 用邻接矩阵表示
