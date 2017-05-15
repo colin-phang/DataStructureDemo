@@ -20,8 +20,18 @@ public class Expression {
 
     //实现0~9的加减乘法
     public static void main(String[] args) {
-        char[] expression = "4*(5-1)+1-2".toCharArray();
+        char[] expression = "4*(5-1+1)-2".toCharArray();
         Stack<Integer> data = new Stack<>();
+        data.push(2);
+        data.push(3);
+        data.push(4);
+        System.out.println(data.peek());
+        System.out.println(data.peek());
+        System.out.println(data.peek());
+        System.out.println(data.pop());
+        System.out.println(data.pop());
+        System.out.println(data.pop());
+
         Stack<Character> op = new Stack<>();
         Map<Character, Integer> priority = new HashMap<>();
         priority.put('(', 0);
@@ -36,7 +46,7 @@ public class Expression {
             } else if (c == '(') {
                 op.push(c);
             } else if (c == ')') {
-                while (op.peek() != '(')
+                while (op.peek() != '(')//一直计算到遇到左括号之前
                     calc(data, op);
                 //遇到左括号
                 op.pop();
