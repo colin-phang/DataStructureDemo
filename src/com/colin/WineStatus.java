@@ -6,6 +6,15 @@ import java.util.Set;
 
 /**
  * 泊松分酒问题
+ * <p>
+ * 三个瓶子中的酒量看成一个状态，即图中的节点
+ * 经过操作把一个状态转成另一种状态，即图中的边
+ * 分酒问题就成为 求节点通路的问题
+ * <p>
+ * 这个问题特殊之处在于 开始只有一个状态（节点），这个图的节点（其他的分酒状态）要动态产生出来。
+ * <p>
+ * 解法就是，对已有的状态 不断地进行可能的操作来产生新状态，直到不能产生新的状态，计算就停止了。
+ * 这一过程中，如果碰到了最终要求的状态，则该题有解。
  * Created by Colin on 2017/5/15.
  */
 public class WineStatus {
@@ -18,7 +27,7 @@ public class WineStatus {
         for (; ; ) {
             Set<WineStatus> subSet = new HashSet<>();
 
-            for (WineStatus status : allState) {
+            for (WineStatus status : allState) {//深度优先遍历
                 subSet.addAll(status.op());
             }
 
@@ -67,17 +76,20 @@ public class WineStatus {
                 if (wine[i] == 0) continue;
                 if (wine[j] == full[j]) continue;
 
-                if (wine[i] > full[j]) {
-                    wine[j] = full[j];
-                    wine[i] -= full[j];
-                } else {
-                    wine[j] += wine[i];
-                    wine[i] = 0;
+                WineStatus n = new WineStatus(wine[0], wine[1], wine[2]);//新状态
+                n.from = this;
+
+                //由i桶倒向j桶
+                n.wine[j] += n.wine[i];
+                n.wine[i] = 0;
+
+                if (n.wine[j] > n.full[j]) {
+                    n.wine[i] = n.wine[j] - n.full[j];
+                    n.wine[j] = n.full[j];
                 }
 
-                WineStatus newStatus = new WineStatus(wine[0], wine[1], wine[2]);
-                newStatus.from = this;
-                statuses.add(newStatus);
+
+                statuses.add(n);
             }
         }
 
