@@ -22,16 +22,6 @@ public class Expression {
     public static void main(String[] args) {
         char[] expression = "4*(5-1+1)-2".toCharArray();
         Stack<Integer> data = new Stack<>();
-        data.push(2);
-        data.push(3);
-        data.push(4);
-        System.out.println(data.peek());
-        System.out.println(data.peek());
-        System.out.println(data.peek());
-        System.out.println(data.pop());
-        System.out.println(data.pop());
-        System.out.println(data.pop());
-
         Stack<Character> op = new Stack<>();
         Map<Character, Integer> priority = new HashMap<>();
         priority.put('(', 0);
